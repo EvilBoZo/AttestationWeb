@@ -1,0 +1,14 @@
+.task-card-item {
+  display: flex;
+  flex-direction: row;
+  margin-left: 20px;
+  margin-top: 10px;
+}
+
+.task-card-item div {
+  padding-right: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-basis: content;
+}

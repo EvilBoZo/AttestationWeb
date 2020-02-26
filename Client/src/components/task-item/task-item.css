@@ -1,0 +1,20 @@
+.item {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.item-text {
+  flex-grow: 1;
+}
+
+.item-buttons {
+  display: flex;
+  flex-direction: row;
+  width: 300px;
+}
+
+.item-buttons input {
+  width: 70%;
+  margin-right: 10px;
+}

@@ -1,0 +1,10 @@
+.nav-bar {
+  background-color: #bcc4de;
+  width: 200px;
+}
+
+.nav-bar div {
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+}
