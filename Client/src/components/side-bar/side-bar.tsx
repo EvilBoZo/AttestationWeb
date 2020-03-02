@@ -3,9 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 import './side-bar.css';
 
-/**
- * Компонент правой панели навигации.
- */
+/** Компонент правой панели навигации. */
 export const SideBar = () => {
   return (
     <div className='side-bar'>

@@ -57,13 +57,8 @@ class TaskCard extends React.Component<ITaskCardProps, ITaskCardState> {
   private async handleSubmit(): Promise<void> {
     const task = new Task(this.state.task.id, this.state.text, this.state.isImportant, this.state.isCompleted, false);
     this.setState({ task: task });
-    try {
-      await editTask(task);
-      await this.props.refreshTasks();
-    }
-    catch (error) {
-      alert(error.message);
-    }
+    await editTask(task);
+    await this.props.refreshTasks();
   }
 
   /** @inheritdoc */

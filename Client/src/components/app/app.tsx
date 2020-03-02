@@ -52,13 +52,8 @@ export default class App extends React.Component<IAppProps, IAppState> {
 
   /** Добавить новую задачу. */
   private async addNewTask(text: string, isImportant: boolean): Promise<void> {
-    try {
-      await addTask(text, isImportant);
-      await this.refreshTasks();
-    }
-    catch (error) {
-      alert(error.message);
-    }
+    await addTask(text, isImportant);
+    await this.refreshTasks();
   }
 
   /** @inheritdoc */

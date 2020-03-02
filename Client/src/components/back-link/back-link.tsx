@@ -3,9 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 import './back-link.css';
 
-/**
- * Компонент правой панели навигации.
- */
+/** Компонент правой панели навигации. */
 export const BackLink = () => {
   return (
     <div className='back-link'>
