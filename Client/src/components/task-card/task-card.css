@@ -1,14 +1,15 @@
-.task-card-item {
+@b task-card {
   display: flex;
-  flex-direction: row;
-  margin-left: 20px;
+  flex-direction: column;
   margin-top: 10px;
 }
 
-.task-card-item div {
-  padding-right: 10px;
+@b task-card-item {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  flex-basis: content;
+  flex-direction: row;
+  align-items: center;
+
+  @e item {
+    padding-left: 20px;
+  }
 }

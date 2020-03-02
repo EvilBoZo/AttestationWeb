@@ -76,7 +76,7 @@ export async function addTask(currentText: string, currentIsImportant: boolean):
   };
   const response = await fetch('api/task/add', options);
   if (response.status === 204) {
-    return alert('Задача добавлена');
+    return alert(`Задача ${task.id} добавлена`);
   }
   throw new Error(`Error: ${response.statusText}`);
 }
@@ -93,7 +93,7 @@ export async function editTask(task: Task): Promise<void> {
   };
   const response = await fetch('api/task/edit', options);
   if (response.status === 204) {
-    return alert('Задача изменена');
+    return alert(`Задача ${task.id} изменена`);
   }
   throw new Error(`Error: ${response.statusText}`);
 }
@@ -101,17 +101,17 @@ export async function editTask(task: Task): Promise<void> {
 /**
  * Удалить список задач по id.
  */
-export async function deleteTasks(ids: Array<number>): Promise<void> {
+export async function deleteTask(id: number): Promise<void> {
 
   const options = {
     headers: { 'Content-Type': 'application/json' },
     method: 'POST',
-    body: JSON.stringify(ids)
+    body: JSON.stringify(id)
   };
 
   const response = await fetch('api/task/delete', options);
   if (response.status === 204) {
-    return alert('Задача удалена');
+    return alert(`Задача ${id} удалена`);
   }
   throw new Error(`Error: ${response.statusText}`);
 }

@@ -1,0 +1,10 @@
+@b side-bar {
+  background-color: #bcc4de;
+  min-width: 200px;
+
+  @e item {
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+}

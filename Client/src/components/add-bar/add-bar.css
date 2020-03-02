@@ -1,0 +1,15 @@
+@b add-bar {
+  margin-left: 10px;
+  float: left;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+  @e item {
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-basis: content;
+  }
+}

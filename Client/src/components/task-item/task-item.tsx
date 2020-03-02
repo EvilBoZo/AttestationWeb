@@ -3,99 +3,81 @@ import { autobind } from 'core-decorators';
 import { NavLink } from 'react-router-dom';
 
 import Task from '../../types/task';
-import { editTask } from '../../api';
+import { deleteTask, editTask } from '../../api';
 
 import './task-item.css';
 
 interface ITaskItemProps {
-  Id: number;
-  Text: string;
-  IsImportant: boolean;
-  IsCompleted: boolean;
-  IsDeleted: boolean;
+  id: number;
+  text: string;
+  isImportant: boolean;
+  isCompleted: boolean;
+  isDeleted: boolean;
+  refreshTasks(): Promise<void>;
 }
 
 interface ITaskItemState {
-  Text: string;
-  IsImportant: boolean;
-  IsCompleted: boolean;
-  IsDeleted: boolean;
+  text: string;
+  isImportant: boolean;
+  isCompleted: boolean;
+  isDeleted: boolean;
 }
 
-/**
- * Компонент элемента списка задач.
- */
+/** Компонент элемента списка задач. */
 @autobind
 export default class TaskItem extends React.Component<ITaskItemProps, ITaskItemState> {
 
+  /** @inheritdoc */
   constructor(props: ITaskItemProps) {
     super(props);
-    this.state = { Text: this.props.Text, IsImportant: this.props.IsImportant, IsCompleted: this.props.IsCompleted, IsDeleted: false };
+    this.state = { text: this.props.text, isImportant: this.props.isImportant, isCompleted: this.props.isCompleted, isDeleted: false };
   }
 
-  private async HandleCompletedClick(): Promise<void> {
+  /** Обработчик события нажатия кнопки "Выполнить". */
+  private async handleCompletedClick(): Promise<void> {
     let isCompleted: boolean;
-    if (this.state.IsCompleted) {
+    if (this.state.isCompleted)
       isCompleted = false;
-      this.setState({ IsCompleted: isCompleted });
-      this.setComplete(isCompleted);
-    }
-    else {
+    else
       isCompleted = true;
-      this.setState({ IsCompleted: isCompleted });
-      this.setComplete(isCompleted);
-    }
+    this.setState({ isCompleted: isCompleted });
+    await editTask(new Task(this.props.id, this.state.text, this.state.isImportant, isCompleted, this.state.isDeleted));
+    await this.props.refreshTasks();
   }
 
-  private async HandleDeletedClick(): Promise<void> {
-    let isDeleted: boolean;
-    if (this.state.IsDeleted) {
-      isDeleted = false;
-      this.setState({ IsDeleted: isDeleted });
-      this.setDelete(isDeleted);
-    }
-    else {
-      isDeleted = true;
-      this.setState({ IsDeleted: isDeleted });
-      this.setDelete(isDeleted);
-    }
+  /** Обработчик события нажатия кнопки "Удалить". */
+  private async handleDeletedClick(): Promise<void> {
+    await deleteTask(this.props.id);
+    await this.props.refreshTasks();
   }
 
-  private async setComplete(isCompleted: boolean): Promise<void> {
-    try {
-      await editTask(new Task(this.props.Id, this.state.Text, this.state.IsImportant, isCompleted, this.state.IsDeleted));
-    }
-    catch (error) {
-      alert(error.message);
-    }
-  }
-
-  private async setDelete(isDeleted: boolean): Promise<void> {
-    try {
-      await editTask(new Task(this.props.Id, this.state.Text, this.state.IsImportant, this.state.IsCompleted, isDeleted));
-    }
-    catch (error) {
-      alert(error.message);
-    }
-  }
-
+  /** @inheritdoc */
   public render(): React.ReactNode {
     return (
-      <div className='item'>
-        <div className='item-text'>
-          <NavLink to={'/todo/' + this.props.Id}>{this.state.IsCompleted ? <del>{this.props.Text}</del> : this.props.Text}</NavLink>
+      <div className='task-item'>
+        <div className='task-item-info'>
+          <div className='task-item-info__item'>
+            <p>{this.props.id}</p>
+          </div>
+          <div className='task-item-info__item'>
+            <NavLink to={'/todo/' + this.props.id}>{this.state.isCompleted ? <del>{this.props.text}</del> : this.props.text}</NavLink>
+          </div>
         </div>
-        <div className='item-buttons'>
-          <input
-            type='button'
-            value={this.state.IsCompleted ? 'Вернуть в работу' : 'Выполнить'}
-            onClick={this.HandleCompletedClick}
-          />
-          <input
-            type='button'
-            value={!this.state.IsDeleted ? 'Удалить' : 'Восстановить'}
-            onClick={this.HandleDeletedClick}
-          />
+        <div className='task-item-buttons'>
+          <div className='task-item-buttons__item'>
+            <input
+              type='button'
+              value={this.state.isCompleted ? 'Вернуть в работу' : 'Выполнить'}
+              onClick={this.handleCompletedClick}
+            />
+          </div>
+          <div className='task-item-buttons__item'>
+            <input
+              type='button'
+              value='Удалить'
+              onClick={this.handleDeletedClick}
+            />
+          </div>
         </div>
       </div>
     );

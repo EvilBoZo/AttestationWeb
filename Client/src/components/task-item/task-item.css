@@ -1,20 +1,27 @@
-.item {
+@b task-item {
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
+  justify-content: space-between;
+  flex-basis: content;
+  align-items: center;
 }
 
-.item-text {
-  flex-grow: 1;
-}
-
-.item-buttons {
+@b task-item-info {
   display: flex;
   flex-direction: row;
-  width: 300px;
+  align-items: center;
+
+  @e item {
+    padding-right: 10px;
+  }
 }
 
-.item-buttons input {
-  width: 70%;
-  margin-right: 10px;
+@b task-item-buttons {
+  display: flex;
+  flex-direction: row;
+  padding-right: 10px;
+
+  @e item {
+    padding-right: 10px;
+  }
 }

@@ -51,13 +51,13 @@ namespace WebServer.Controllers
     }
 
     /// <summary>
-    /// Удалить список задач по id. 
+    /// Удалить задачу по id. 
     /// </summary>
-    /// <param name="ids"></param>
+    /// <param name="id"></param>
     [HttpPost]
-    public void Delete([FromBody] List<int> ids)
+    public void Delete([FromBody] int id)
     {
-      TasksEditor.Delete(ids);
+      TasksEditor.Delete(id);
     }
   }
 }

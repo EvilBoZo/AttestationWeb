@@ -20,16 +20,16 @@ namespace WebServer.Models
     /// <summary>
     /// Путь к сериализованному списку задач.
     /// </summary>
-    private static string path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\tasks.json";
+    private static string path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\tasks.json"; //@"D:\tasks.json";
 
-    #endregion
+        #endregion
 
-    #region Методы
+        #region Методы
 
-    /// <summary>
-    /// Сериализовать список задач.
-    /// </summary>
-    private static void Serialize()
+        /// <summary>
+        /// Сериализовать список задач.
+        /// </summary>
+        private static void Serialize()
     {
       if (tasks.Count == 0)
       {
@@ -90,20 +90,17 @@ namespace WebServer.Models
     }
 
     /// <summary>
-    /// Удалить список задач по id.
+    /// Удалить задачу по id.
     /// </summary>
-    /// <param name="ids"></param>
-    public static void Delete(List<int> ids)
+    /// <param name="id"></param>
+    public static void Delete(int id)
     {
-      foreach (Task currentTask in tasks.ToArray())
+      foreach (Task currentTask in tasks)
       {
-        foreach (int id in ids)
+        if (currentTask.Id == id)
         {
-          if (currentTask.Id == id)
-          {
-            tasks.Remove(currentTask);
-            break;
-          }
+          tasks.Remove(currentTask);
+          break;
         }
       }
       Serialize();
