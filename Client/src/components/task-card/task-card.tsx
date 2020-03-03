@@ -4,8 +4,7 @@ import { autobind } from 'core-decorators';
 
 import Task from '../../types/task';
 import { editTask, getTaskById } from '../../api';
-
-import './task-card.css';
+import { BackLink } from '../back-link/back-link';
 
 interface ITaskCardParams {
   id: string;
@@ -64,45 +63,36 @@ class TaskCard extends React.Component<ITaskCardProps, ITaskCardState> {
   /** @inheritdoc */
   public render(): React.ReactNode {
     return (
-      <div className='task-card'>
-        <div className='task-card-item'>
-          <div className='task-card-item__item'>
-            <p>Текст задачи</p>
-          </div>
-          <div className='task-card-item__item'>
+      <div>
+        <div className='header'>
+          <BackLink />
+        </div>
+        <div className='flexible-column'>
+          <label className='flexible-column__item'>
+            <span>Текст задачи: </span>
             <input
               type='text'
               value={this.state.text}
               onChange={this.handleTextChange}
             />
-          </div>
-        </div>
-        <div className='task-card-item'>
-          <div className='task-card-item__item'>
+          </label>
+          <label className='flexible-column__item'>
             <input
               type='checkbox'
               checked={this.state.isImportant}
               onChange={this.handleImportantChange}
             />
-          </div>
-          <div className='task-card-item__item'>
-            <p>Задача важная</p>
-          </div>
-        </div>
-        <div className='task-card-item'>
-          <div className='task-card-item__item'>
+            <span> - Задача важная</span>
+          </label>
+          <label className='flexible-column__item'>
             <input
               type='checkbox'
               checked={this.state.isCompleted}
               onChange={this.handleCompletedChange}
             />
-          </div>
-          <div className='task-card-item__item'>
-            <p>Задача выполнена</p>
-          </div>
-        </div>
-        <div className='task-card-item'>
-          <div className='task-card-item__item'>
+            <span> - Задача выполнена</span>
+          </label>
+          <div className='flexible-column__item'>
             <input
               type='button'
               value='Сохранить'

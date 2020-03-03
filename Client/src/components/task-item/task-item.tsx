@@ -5,8 +5,6 @@ import { NavLink } from 'react-router-dom';
 import Task from '../../types/task';
 import { deleteTask, editTask } from '../../api';
 
-import './task-item.css';
-
 interface ITaskItemProps {
   id: number;
   text: string;
@@ -54,24 +52,24 @@ export default class TaskItem extends React.Component<ITaskItemProps, ITaskItemS
   /** @inheritdoc */
   public render(): React.ReactNode {
     return (
-      <div className='task-item'>
-        <div className='task-item-info'>
-          <div className='task-item-info__item'>
+      <div className='flexible-row flexible-row_space-between'>
+        <div className='flexible-row'>
+          <div className='flexible-row__item'>
             <p>{this.props.id}</p>
           </div>
-          <div className='task-item-info__item'>
+          <div className='flexible-row__item'>
             <NavLink to={'/todo/' + this.props.id}>{this.state.isCompleted ? <del>{this.props.text}</del> : this.props.text}</NavLink>
           </div>
         </div>
-        <div className='task-item-buttons'>
-          <div className='task-item-buttons__item'>
+        <div className='flexible-row'>
+          <div className='flexible-row__item'>
             <input
               type='button'
               value={this.state.isCompleted ? 'Вернуть в работу' : 'Выполнить'}
               onClick={this.handleCompletedClick}
             />
           </div>
-          <div className='task-item-buttons__item'>
+          <div className='flexible-row__item'>
             <input
               type='button'
               value='Удалить'

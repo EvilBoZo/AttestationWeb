@@ -58,29 +58,25 @@ export default class AddBar extends React.Component<ITasksProps, ITasksState> {
   /** @inheritdoc */
   public render(): React.ReactNode {
     return (
-      <div className='add-bar'>
-        <div className='add-bar__item'>
-          <p>Текст новой задачи</p>
-        </div>
-        <div className='add-bar__item'>
+      <div className='header flexible-row add-bar'>
+        <label className='flexible-row__item'>
+          <span>Текст новой задачи: </span>
           <input
             type='text'
             value={this.state.text}
             onChange={this.handleTextChange}
             onKeyPress={this.handleTextKeyPress}
           />
-        </div>
-        <div className='add-bar__item'>
+        </label>
+        <label className='flexible-row__item'>
           <input
             type='checkbox'
             checked={this.state.isImportant}
             onChange={this.handleCheckChange}
           />
-        </div>
-        <div className='add-bar__item'>
-          <p>Задача важная</p>
-        </div>
-        <div className='add-bar__item'>
+          <span> - Задача важная</span>
+        </label>
+        <div className='flexible-row__item'>
           <input
             type='button'
             value='Добавить'

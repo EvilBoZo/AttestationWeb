@@ -6,8 +6,8 @@ import './back-link.css';
 /** Компонент правой панели навигации. */
 export const BackLink = () => {
   return (
-    <div className='back-link'>
-      <NavLink to='/'>Вернуться к списку</NavLink>
+    <div className='header flexible-row'>
+      <NavLink className='back-link' to='/'>Вернуться к списку</NavLink>
     </div>
   );
 };

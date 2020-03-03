@@ -4,31 +4,31 @@ import { autobind } from 'core-decorators';
 import TaskItem from '../task-item/task-item';
 import Task from '../../types/task';
 
-import './tasks-selection.css';
+import './task-items-list.css';
 
-interface ITasksSelectionProps {
+interface ITaskItemListProps {
   tasks: Array<Task>;
   refreshTasks(): Promise<void>;
 }
 
 /** Компонент для отображения выполненных задач. */
 @autobind
-export default class TasksSelection extends React.Component<ITasksSelectionProps> {
+export default class TasksSelection extends React.Component<ITaskItemListProps> {
 
   /** @inheritdoc */
-  constructor(props: ITasksSelectionProps) {
+  constructor(props: ITaskItemListProps) {
     super(props);
   }
 
   /** @inheritdoc */
   public render(): React.ReactNode {
-    let tasksArea = <ul />;
-    let taskArea = <li />;
+    let taskItemList = <ul />;
+    let taskItem = <li />;
     if (this.props.tasks !== null) {
-      tasksArea = <ul>{
+      taskItemList = <ul>{
         this.props.tasks.map(task => {
           if (task.isImportant) {
-            taskArea =
+            taskItem =
               <li key={task.id}>
                 <TaskItem
                   id={task.id}
@@ -41,7 +41,7 @@ export default class TasksSelection extends React.Component<ITasksSelectionProps
               </li>;
           }
           else {
-            taskArea =
+            taskItem =
               <li
                 key={task.id}
                 className='no-marker'
@@ -56,13 +56,13 @@ export default class TasksSelection extends React.Component<ITasksSelectionProps
                 />
               </li>;
           }
-          return taskArea;
+          return taskItem;
         })
       }</ul>;
     }
     return (
-      <div className='tasks-selection'>
-        {tasksArea}
+      <div className='task-items-list'>
+        {taskItemList}
       </div>
     );
   }
